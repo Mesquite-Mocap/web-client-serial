@@ -1,3 +1,5 @@
+/* This file is is the customization for the model. This takes the aggregration, the bone assigments and then handles the coordinates */ 
+
 var rigPrefix = "mixamorig";
 
 function calibrate()
@@ -25,11 +27,12 @@ function handleWSMessage(obj)
       var qR = q.mul(qC);
       var qF;
 
+    // This switch case is for the bone. You need to define the limb. 
 
       switch(bone){
         case 'LeftArm':
           qF = qR;
-          x.quaternion.set(-qF.y, qF.x, -qF.z, qF.w);
+          x.quaternion.set(-qF.y, qF.x, -qF.z, qF.w); // EDIT THIS TO MATCH THE MOVEMENT.  Each one is different, but it takes the measurements of each axis
           break;
        
         case 'LeftForeArm':
@@ -40,14 +43,17 @@ function handleWSMessage(obj)
           qF = q.mul(qC);
           */
           qF = qR;
-          x.quaternion.set(qF.z, -qF.x, qF.y, qF.w);
+          x.quaternion.set(qF.z, -qF.x, qF.y, qF.w); // EDIT THIS TO MATCH THE MOVEMENT.  Each one is different, but it takes the measurements of each axis
           break;
        
         default:
          qF = qR;
-         x.quaternion.set(qF.y, -qF.x, -qF.z, qF.w);
+         x.quaternion.set(qF.y, -qF.x, -qF.z, qF.w); // EDIT THIS TO MATCH THE MOVEMENT.  Each one is different, but it takes the measurements of each axis
          break;
       }
+    
+    //THIS WILL ASSIGN THE "BONES" to the Model 
+    
       mac2Bones[obj.id].actual.x = qF.x;
       mac2Bones[obj.id].actual.y = qF.y;
       mac2Bones[obj.id].actual.z = qF.z;
