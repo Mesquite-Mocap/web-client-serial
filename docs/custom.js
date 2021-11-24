@@ -8,7 +8,6 @@ function calibrate()
       mac2Bones[keys[i]].calibration.y = mac2Bones[keys[i]].last.y;
       mac2Bones[keys[i]].calibration.z = mac2Bones[keys[i]].last.z;
       mac2Bones[keys[i]].calibration.w = mac2Bones[keys[i]].last.w;
-      console.log(mac2Bones[keys[i]])
     }
 }
 
@@ -29,9 +28,9 @@ function handleWSMessage(obj)
       switch(bone){
         case 'LeftArm':
           qF = qR;
-          x.quaternion.set(-qF.y, qF.x, -qF.z, qF.w);
+          x.quaternion.set( qF.y, qF.x, -qF.z, -qF.w);
           break;
-       
+
         case 'LeftForeArm':
          // console.log(bone, obj,qR);
          /*
@@ -40,9 +39,10 @@ function handleWSMessage(obj)
           qF = q.mul(qC);
           */
           qF = qR;
-          x.quaternion.set(qF.z, -qF.x, qF.y, qF.w);
+        console.log(qF)
+          x.quaternion.set(-qF.z, qF.x, -qF.y, -qF.w);
           break;
-       
+
         default:
          qF = qR;
          x.quaternion.set(qF.y, -qF.x, -qF.z, qF.w);
