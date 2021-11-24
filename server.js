@@ -1,3 +1,5 @@
+/* Start a server to use the files in the /docs/ folder */
+
 var express = require("express");
 var app = express();
 var bodyParser = require('body-parser');

@@ -1,9 +1,12 @@
-let port;
-let reader;
-let inputDone;
+/* This will the data from the serial port with all the information that's been aggregated */ 
+
+
+let port; // define that are going to open a port 
+let reader; // the reading mechanism that stores the input stream 
+let inputDone; 
 let outputDone;
-let inputStream;
-let outputStream;
+let inputStream; //the input stream itself
+let outputStream; //if we are sending to the raspberri pi 
 let showCalibration = false;
 
 let orientation = [0, 0, 0];
