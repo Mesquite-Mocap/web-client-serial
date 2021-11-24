@@ -1,3 +1,14 @@
+function getMacOfBone(bone)
+{
+    var keys = Object.keys(mac2Bones);
+    for(var i = 0; i < keys.length; i++){
+      if(mac2Bones[keys[i]].id === bone){
+        return keys[i];
+      }
+    }
+    return -1;
+}
+
 /* This file is is the customization for the model. This takes the aggregration, the bone assigments and then handles the coordinates */ 
 
 var rigPrefix = "mixamorig";
@@ -35,15 +46,22 @@ function handleWSMessage(obj)
           break;
 
         case 'LeftForeArm':
-         // console.log(bone, obj,qR);
-         /*
           var q = new Quaternion(qR.x, qR.y, qR.z, qR.w);
-          var qC = new Quaternion(mac2Bones["LeftArm"].actual.x,mac2Bones["LeftArm"].actual.y,mac2Bones["LeftArm"].actual.z,mac2Bones["LeftArm"].calibration.w).inverse()
-          qF = q.mul(qC);
-          */
-          qF = qR;
-        console.log(qF)
+          console.log(bone)
+          var mac = getMacOfBone("LeftArm");
+          console.log(mac)
+          var qC = new Quaternion(mac2Bones[mac].actual.x,mac2Bones[mac].actual.y,mac2Bones[mac].actual.z,mac2Bones[mac].calibration.w);
+            console.log(bone);
+          if(Math.abs(q.y - qC.y)>.05){
+            qF = q.mul(qC.inverse());
+          }
+          else{
+            qF = qR;
+          }
+         //   qF = qR;
+         qF = new Quaternion(q.x-qC.x, q.y-qC.y, q.z-qC.z, q.w-qC.w)
           x.quaternion.set(-qF.z, qF.x, -qF.y, -qF.w);
+          console.log(bone,qR,qF);
           break;
 
         default:
