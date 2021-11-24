@@ -43,7 +43,7 @@ function handleWSMessage(obj)
           */
           qF = qR;
         console.log(qF)
-          x.quaternion.set(qF.z, qF.x, qF.y, -qF.w);
+          x.quaternion.set(-qF.z, qF.x, -qF.y, -qF.w);
           break;
 
         default:
